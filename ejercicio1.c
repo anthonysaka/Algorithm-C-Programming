@@ -1,37 +1,37 @@
-/* Escriba un programa al cual se le digiten diez valores y al final imprima por pantalla la suma de los valores, la suma de los cuadrados, el promedio,
-el máximo y el mínimo.*/
+//EJERCICIO 1: Escribir un programa que lea la hora de un día de notación de 24 horas y la respuesta en notación de 12 horas.
+//Desarrollado por ------------------------> Anthony Sakamoto 2016-1565 <------------------------
+/***POR MOTIVO DE MAYOR COMPRESION DEL CODIGO, SE HAN COMENTADO DURANTE EL DESARROLLO, LOS RESPECTIVOS BLOQUES DE CODIGO DEL PROGRAMA, SIENTASE LIBRE DE
+EXPLORAR EL SIGUIENTE CODIGO***/
 #include <stdio.h>
-#include <math.h>
 
-int limitador=1;
-long total_suma_cuadrados=0;
-float num,max,min,total_suma=0,promedio=0;
-
+     int horas_not_24,minutos,horas_not_12,hora_cero; //Variables para almacenar las horas y minutos.
+     char simbologia; //Variable para almacenar el caracter ':'
 int main() {
+  printf("BINEVENID@S\n\n");
+  printf("%s","Digite la hora en notación de 24 horas, (HH:MM): " );
+  scanf("%d%c%d",&horas_not_24,&simbologia,&minutos);
 
-while (limitador<=10) {
+  if (simbologia!=':'){ //Sentencia if para que solo se puede utilizar ':', HH:MM.;
+    printf("%s\n","ERROR, debe utilizar dos puntos, HH:MM" );
+    return 0;} // fin sentencia if
+  if (horas_not_24>=24 | minutos>59) { //Sentencia if para controlar que las horas y minutos digitas sean veridicas.
+    printf("%s\n","ERROR, cantidad de horas o minutos invalida" );
+    return 0; } //Fin sentencia if.
 
-  printf("%s\n","Digite un numero:");
-            scanf( "%f", &num );
-             while (num<0) {
-               printf("%s\n","No puede ser negativo" );
-               return 0;
-             }
-             if ( num >= max ){
-                max = num;
-              }
-             if (num < min || limitador==1){
-               min=num;
-              }
-   total_suma+=num;
-   total_suma_cuadrados+=pow(num,2);
-   promedio=total_suma/limitador;
-   limitador++;
-}
-printf("\n%-30s %.1f\n","El numero maximo es: ", max);
-printf("%-30s %.1f\n","El numero minimo: ", min);
-printf("%-30s %.1f\n","La suma total es:", total_suma);
-printf("%-30s %ld\n","La suma de los cuadrado es:", total_suma_cuadrados);
-printf("%-30s %.1f %c\n","El promedio es:", promedio,37);
-  return 0;
+   //Sentencia if --> consta de 4 condiciones para convertir la hora de notacion 24 a 12.
+  if (horas_not_24<12 && horas_not_24>0){
+      printf("\n%s %.2d:%.2d A.M.\n","La hora es : ",horas_not_24,minutos);
+   }
+  else if (horas_not_24==12){
+      printf("\n%s %.2d:%.2d P.M.\n","La hora es : ",horas_not_24,minutos);
+   }
+  else if (horas_not_24==0){
+      hora_cero=horas_not_24 + 12;
+      printf("\n%s %.2d:%.2d A.M.\n","La hora es : ",hora_cero,minutos);
+  }
+  else if (horas_not_24>=13 && horas_not_24<=23){
+      horas_not_12 = horas_not_24-12;
+      printf("\n%s %.2d:%.2d P.M.\n","La hora es : ",horas_not_12,minutos);
+  } //Fin sentencia if.
+return 0;
 }
